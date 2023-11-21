@@ -1,5 +1,7 @@
 package com.waleed.oopsproject.Products;
 
+import com.waleed.oopsproject.Bids.BidModel;
+
 import javax.persistence.*;
 
 @Entity
@@ -27,14 +29,15 @@ public class ProductModel {
     @Column(name="startingBid")
     private int startingBid;
 
-    @Column(name="bids")
-    private int[] bids;
+    @OneToMany(targetEntity = BidModel.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "productId", referencedColumnName = "productId")
+    private BidModel[] bids;
 
-    public void setBids(int[] bids) {
+    public void setBids(BidModel[] bids) {
         this.bids = bids;
     }
 
-    public int[] getBids() {
+    public BidModel[] getBids() {
         return bids;
     }
 
@@ -60,6 +63,42 @@ public class ProductModel {
 
     public String getCategory() {
         return category;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getProductId() {
+        return name;
     }
 
 
