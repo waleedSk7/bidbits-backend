@@ -65,4 +65,14 @@ public class ProductService {
     public Iterable<ProductModel> getProductsBySellerId(String sellerId) {
         return productRepository.findBySellerId(sellerId).orElse(null);
     }
+
+    public String deleteBids(Long productId) {
+        ProductModel existingProduct = productRepository.findById(productId).orElse(null);
+        assert existingProduct != null;
+        BidModel[] bids = existingProduct.getBids();
+        BidModel[] newBids = new BidModel[bids.length - 1];
+        System.arraycopy(bids, 0, newBids, 0, bids.length - 1);
+        existingProduct.setBids(newBids);
+        return "Bid removed !! " + productId;
+    }
 }

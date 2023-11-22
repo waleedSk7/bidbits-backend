@@ -1,16 +1,15 @@
 package com.waleed.oopsproject.Bids;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface BidRepository {
-    Optional<BidModel> findByProductId(String productId);
+public interface BidRepository  extends JpaRepository<BidModel, Long> {
 
-    BidModel save(BidModel bidModel);
-
-    void deleteByProductId(String productId);
+    List<BidModel> findAllBy();
 
     void deleteByUserId(String userId);
 

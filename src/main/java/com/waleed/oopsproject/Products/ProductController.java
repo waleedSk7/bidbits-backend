@@ -52,4 +52,9 @@ public class ProductController {
         return productService.getProductsByCategory(category);
     }
 
+    @DeleteMapping(path="/deleteBids")
+    public String deleteBids(@RequestParam Long productId) {
+        return productService.deleteBids(productId);
+    }
+
 }
