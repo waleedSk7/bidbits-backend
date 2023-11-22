@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ProductRepository extends JpaRepository<ProductModel, String> {
+public interface ProductRepository extends JpaRepository<ProductModel, Long> {
     List<ProductModel> findByCategory(String category);
 
     Optional<ProductModel> findByProductName(String productName);

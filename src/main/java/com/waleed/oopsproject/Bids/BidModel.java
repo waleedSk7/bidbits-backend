@@ -1,10 +1,26 @@
 package com.waleed.oopsproject.Bids;
 
+import com.waleed.oopsproject.Products.ProductModel;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "bids")
 public class BidModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "bidId")
+    private int bidId;
+
+    @Column(name = "userId")
     private String userId;
+
+    @Column(name = "bid")
     private int bid;
 
-    private String productId;
+    @ManyToOne(targetEntity = ProductModel.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "productId", referencedColumnName = "productId")
+    private Long productId;
 
     public BidModel(String userId, int bid) {
         this.userId = userId;
@@ -30,11 +46,11 @@ public class BidModel {
         this.bid = bid;
     }
 
-    public void setProductId(String productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
-    public String getProductId() {
+    public Long getProductId() {
         return productId;
     }
 }

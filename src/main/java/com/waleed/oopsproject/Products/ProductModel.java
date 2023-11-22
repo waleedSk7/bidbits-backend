@@ -2,15 +2,15 @@ package com.waleed.oopsproject.Products;
 
 import com.waleed.oopsproject.Bids.BidModel;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "products")
 public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productId")
-    private String name;
+    @Column(name = "productId", insertable = false, updatable = false)
+    private Long id;
     @Column(name = "productName")
     private String productName;
 
@@ -29,7 +29,7 @@ public class ProductModel {
     @Column(name="startingBid")
     private int startingBid;
 
-    @OneToMany(targetEntity = BidModel.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = BidModel.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "productId", referencedColumnName = "productId")
     private BidModel[] bids;
 
@@ -89,16 +89,8 @@ public class ProductModel {
         return productName;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getProductId() {
-        return name;
+    public Long getProductId() {
+        return id;
     }
 
 

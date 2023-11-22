@@ -15,7 +15,7 @@ public class ProductService {
     }
 
     // Read
-    public ProductModel getProductById(String productId) {
+    public ProductModel getProductById(Long productId) {
         return productRepository.findById(productId).orElse(null);
     }
 
@@ -34,7 +34,7 @@ public class ProductService {
     }
 
     // Add bid
-    public ProductModel addBid(String productId, int bid) {
+    public ProductModel addBid(Long productId, int bid) {
         ProductModel existingProduct = productRepository.findById(productId).orElse(null);
         assert existingProduct != null;
         BidModel[] bids = existingProduct.getBids();
@@ -46,7 +46,7 @@ public class ProductService {
     }
 
     // Delete
-    public String deleteProduct(String productId) {
+    public String deleteProduct(Long productId) {
         productRepository.deleteById(productId);
         return "Product removed !! " + productId;
     }

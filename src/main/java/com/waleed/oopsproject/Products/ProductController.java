@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin
 @RestController
-@RequestMapping(path = "api/v1/products")
+@RequestMapping(path = "/api/v1/products")
 public class ProductController {
     @Autowired
     private ProductService productService;
@@ -17,21 +17,39 @@ public class ProductController {
     }
 
     // Read
-    @PostMapping(path = "/")
-    public ProductModel getProductById(@RequestParam String productId) {
+    @GetMapping(path = "/")
+    public ProductModel getProductById(@RequestParam Long productId) {
         return productService.getProductById(productId);
     }
 
     // Update
-    @PostMapping(path = "/")
-    public ProductModel updateProduct(ProductModel productModel) {
+    @PostMapping(path = "/update")
+    public ProductModel updateProduct(@RequestBody ProductModel productModel) {
         return productService.updateProduct(productModel);
     }
 
     // Add bid
-    @PostMapping(path = "/")
-    public ProductModel addBid(String productId, int bid) {
+    @PostMapping(path = "/addBid")
+    public ProductModel addBid(@RequestParam Long productId,@RequestBody int bid) {
         return productService.addBid(productId, bid);
+    }
+
+    // Delete
+    @DeleteMapping(path = "/")
+    public String deleteProduct(@RequestParam Long productId) {
+        return productService.deleteProduct(productId);
+    }
+
+    // Get all
+    @GetMapping(path = "/list")
+    public Iterable<ProductModel> getAllProducts() {
+        return productService.getAllProducts();
+    }
+
+    // Get by category
+    @GetMapping(path = "/listByCategory")
+    public Iterable<ProductModel> getProductsByCategory(@RequestParam String category) {
+        return productService.getProductsByCategory(category);
     }
 
 }
