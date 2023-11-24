@@ -19,4 +19,10 @@ public class UserController {
     public UserModel addUser(@RequestBody UserModel userModel) {
         return userService.addUser(userModel);
     }
+
+    @PostMapping(path = "/check")
+    public Boolean checkUser(@RequestParam Long userId) {
+        UserModel user = userService.getUserById(userId);
+        return user != null;
+    }
 }

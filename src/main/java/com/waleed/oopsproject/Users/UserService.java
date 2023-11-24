@@ -3,6 +3,8 @@ package com.waleed.oopsproject.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class UserService {
 
@@ -14,7 +16,8 @@ public class UserService {
         }
         // Create
         public UserModel addUser(UserModel userModel) {
-            return userRepository.save(userModel);
+            UserModel presentUser = userRepository.findByEmail(userModel.getEmail());
+            return Objects.requireNonNullElseGet(presentUser, () -> userRepository.save(userModel));
         }
 
         // Read
