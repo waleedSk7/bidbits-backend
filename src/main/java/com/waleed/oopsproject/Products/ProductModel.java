@@ -2,6 +2,7 @@ package com.waleed.oopsproject.Products;
 
 import com.waleed.oopsproject.Bids.BidModel;
 
+import com.waleed.oopsproject.Users.UserModel;
 import jakarta.persistence.*;
 
 @Entity
@@ -9,9 +10,9 @@ import jakarta.persistence.*;
 public class ProductModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "productId", insertable = false, updatable = false)
+    @Column(name = "product_id", insertable = false, updatable = false)
     private Long id;
-    @Column(name = "productName")
+    @Column(name = "product_name")
     private String productName;
 
     @Column(name= "image")
@@ -23,23 +24,12 @@ public class ProductModel {
     @Column(name= "category")
     private String category;
 
-    @Column(name="sellerId")
-    private String sellerId;
+    @ManyToOne(targetEntity = UserModel.class)
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    private UserModel user;
 
-    @Column(name="startingBid")
+    @Column(name="starting_bid")
     private int startingBid;
-
-    @ManyToOne(targetEntity = BidModel.class, cascade = CascadeType.ALL)
-    @JoinColumn(name = "productId", referencedColumnName = "productId")
-    private BidModel[] bids;
-
-    public void setBids(BidModel[] bids) {
-        this.bids = bids;
-    }
-
-    public BidModel[] getBids() {
-        return bids;
-    }
 
     public void setStartingBid(int startingBid) {
         this.startingBid = startingBid;
@@ -49,12 +39,16 @@ public class ProductModel {
         return startingBid;
     }
 
-    public void setSellerId(String sellerId) {
-        this.sellerId = sellerId;
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 
-    public String getSellerId() {
-        return sellerId;
+    public UserModel getUser() {
+        return user;
+    }
+
+    public Long getUserId() {
+        return user.getUserId();
     }
 
     public void setCategory(String category) {

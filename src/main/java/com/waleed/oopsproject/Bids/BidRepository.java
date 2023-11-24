@@ -1,5 +1,6 @@
 package com.waleed.oopsproject.Bids;
 
+import com.waleed.oopsproject.Users.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,8 +12,9 @@ public interface BidRepository  extends JpaRepository<BidModel, Long> {
 
     List<BidModel> findAllBy();
 
-    void deleteByUserId(String userId);
+    void deleteByUserId(UserModel userId);
 
-    Optional<BidModel> findByUserId(String userId);
+    Optional<BidModel> findByUserId(UserModel userId);
 
+    List<BidModel> findAllByUserId(UserModel userId);
 }

@@ -14,5 +14,4 @@ public interface ProductRepository extends JpaRepository<ProductModel, Long> {
 
     List<ProductModel> findByProductNameContaining(String productName);
 
-    Optional<List<ProductModel>> findBySellerId(String sellerId);
 }

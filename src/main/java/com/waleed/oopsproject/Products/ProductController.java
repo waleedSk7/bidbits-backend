@@ -12,8 +12,8 @@ public class ProductController {
 
     // Create
     @PostMapping(path = "/")
-    public ProductModel addProduct(@RequestBody ProductModel productModel) {
-        return productService.addProduct(productModel);
+    public ProductModel addProduct(@RequestBody ProductModel productModel, @RequestParam Long userId) {
+        return productService.addProduct(productModel, userId);
     }
 
     // Read
@@ -26,12 +26,6 @@ public class ProductController {
     @PostMapping(path = "/update")
     public ProductModel updateProduct(@RequestBody ProductModel productModel) {
         return productService.updateProduct(productModel);
-    }
-
-    // Add bid
-    @PostMapping(path = "/addBid")
-    public ProductModel addBid(@RequestParam Long productId,@RequestBody int bid) {
-        return productService.addBid(productId, bid);
     }
 
     // Delete
@@ -51,10 +45,4 @@ public class ProductController {
     public Iterable<ProductModel> getProductsByCategory(@RequestParam String category) {
         return productService.getProductsByCategory(category);
     }
-
-    @DeleteMapping(path="/deleteBids")
-    public String deleteBids(@RequestParam Long productId) {
-        return productService.deleteBids(productId);
-    }
-
 }
