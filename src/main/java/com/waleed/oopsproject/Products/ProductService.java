@@ -7,6 +7,9 @@ import com.waleed.oopsproject.Users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.List;
+
 @Service
 public class ProductService {
     @Autowired
@@ -58,5 +61,33 @@ public class ProductService {
     // Get by category
     public Iterable<ProductModel> getProductsByCategory(String category) {
         return productRepository.findByCategory(category);
+    }
+
+    // Get featured products
+    // Find the top 3 products with maximum number of bids
+    public Iterable<ProductModel> getFeaturedProducts() {
+        List<BidModel> bids = bidRepository.findAllBy();
+        HashMap<Long, Integer> productBids = new HashMap<>();
+        for (BidModel bid : bids) {
+            Long productId = bid.getProduct().getProductId();
+            if (productBids.containsKey(productId)) {
+                productBids.put(productId, productBids.get(productId) + 1);
+            } else {
+                productBids.put(productId, 1);
+            }
+        }
+        List<ProductModel> products = productRepository.findAllBy();
+        products.sort((o1, o2) -> {
+            Integer o1Bids = productBids.get(o1.getProductId());
+            Integer o2Bids = productBids.get(o2.getProductId());
+            if (o1Bids == null) {
+                o1Bids = 0;
+            }
+            if (o2Bids == null) {
+                o2Bids = 0;
+            }
+            return o2Bids.compareTo(o1Bids);
+        });
+        return products.subList(0, Math.min(3, products.size()));
     }
 }

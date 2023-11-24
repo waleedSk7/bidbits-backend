@@ -45,4 +45,9 @@ public class ProductController {
     public Iterable<ProductModel> getProductsByCategory(@RequestParam String category) {
         return productService.getProductsByCategory(category);
     }
+
+    @GetMapping(path = "/featured")
+    public Iterable<ProductModel> getFeaturedProducts() {
+        return productService.getFeaturedProducts();
+    }
 }
