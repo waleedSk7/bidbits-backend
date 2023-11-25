@@ -2,12 +2,16 @@
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Bids/BidService.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Users/UserController.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Users/UserRepository.java
+/Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Messages/MessageService.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Products/ProductModel.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Bids/BidModel.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Bids/BidController.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Products/ProductRepository.java
+/Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Messages/MessageRepository.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Users/UserService.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Products/ProductController.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/OopsProjectApplication.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Bids/BidRepository.java
+/Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Messages/MessageModel.java
+/Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Messages/MessageController.java
 /Users/manas/Desktop/oops-project/src/main/java/com/waleed/oopsproject/Products/ProductService.java

@@ -2,12 +2,16 @@ com/waleed/oopsproject/Bids/BidRepository.class
 com/waleed/oopsproject/Bids/BidController.class
 com/waleed/oopsproject/Bids/BidService.class
 com/waleed/oopsproject/OopsProjectApplication.class
+com/waleed/oopsproject/Messages/MessageController.class
 com/waleed/oopsproject/Bids/BidModel.class
 com/waleed/oopsproject/Users/UserService.class
+com/waleed/oopsproject/Messages/MessageRepository.class
 com/waleed/oopsproject/Users/UserController.class
 com/waleed/oopsproject/Products/ProductModel.class
 com/waleed/oopsproject/Users/UserRepository.class
 com/waleed/oopsproject/Products/ProductService.class
+com/waleed/oopsproject/Messages/MessageModel.class
+com/waleed/oopsproject/Messages/MessageService.class
 com/waleed/oopsproject/Products/ProductRepository.class
 com/waleed/oopsproject/Products/ProductController.class
 com/waleed/oopsproject/Users/UserModel.class
