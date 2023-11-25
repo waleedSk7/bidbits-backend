@@ -32,6 +32,7 @@ public class BidService  {
         bidModel.setProduct(productModel);
         UserModel userModel = userRepository.findById(userId).orElse(null);
         assert userModel != null;
+        bidRepository.findByUserId(userModel).ifPresent(bidModel1 -> bidRepository.delete(bidModel1));
         System.out.println(userModel);
         System.out.println(productModel);
         assert productModel.getUser() == userModel;
@@ -43,5 +44,18 @@ public class BidService  {
         UserModel userModel = userRepository.findById(userId).orElse(null);
         assert userModel != null;
         return bidRepository.findAllByUserId(userModel);
+    }
+
+    public int getHighestBid(Long productId) {
+        ProductModel productModel = productRepository.findById(productId).orElse(null);
+        assert productModel != null;
+        List<BidModel> bidModels = bidRepository.findAllByProduct(productModel);
+        int highestBid = 0;
+        for (BidModel bidModel : bidModels) {
+            if (bidModel.getBid() > highestBid) {
+                highestBid = bidModel.getBid();
+            }
+        }
+        return highestBid;
     }
 }

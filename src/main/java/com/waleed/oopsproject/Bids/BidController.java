@@ -26,6 +26,10 @@ public class BidController {
         return bidService.getBidsByUserId(userId);
     }
 
+    @GetMapping(path = "/highestBid/{productId}")
+    public int getHighestBid(@PathVariable Long productId) {
+        return bidService.getHighestBid(productId);
+    }
     // Update
     // Delete
     // Get all
