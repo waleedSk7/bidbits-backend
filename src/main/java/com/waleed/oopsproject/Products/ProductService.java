@@ -34,6 +34,12 @@ public class ProductService {
         return productRepository.findById(productId).orElse(null);
     }
 
+    public Iterable<ProductModel> getProductsByUserId(Long userId) {
+        UserModel userModel = userRepository.findById(userId).orElse(null);
+        assert userModel != null;
+        return productRepository.findAllByUser(userModel);
+    }
+
     // Update
     public ProductModel updateProduct(ProductModel productModel) {
         ProductModel existingProduct = productRepository.findById(productModel.getProductId()).orElse(null);

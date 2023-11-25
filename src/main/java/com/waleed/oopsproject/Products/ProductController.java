@@ -22,6 +22,11 @@ public class ProductController {
         return productService.getProductById(productId);
     }
 
+    @GetMapping(path = "/user")
+    public Iterable<ProductModel> getProductsByUserId(@RequestParam Long userId) {
+        return productService.getProductsByUserId(userId);
+    }
+
     // Update
     @PostMapping(path = "/update")
     public ProductModel updateProduct(@RequestBody ProductModel productModel) {

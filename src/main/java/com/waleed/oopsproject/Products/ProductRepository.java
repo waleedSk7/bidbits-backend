@@ -1,5 +1,6 @@
 package com.waleed.oopsproject.Products;
 
+import com.waleed.oopsproject.Users.UserModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +16,6 @@ public interface ProductRepository extends JpaRepository<ProductModel, Long> {
     List<ProductModel> findByProductNameContaining(String productName);
 
     List<ProductModel> findAllBy();
+
+    Iterable<ProductModel> findAllByUser(UserModel userModel);
 }
