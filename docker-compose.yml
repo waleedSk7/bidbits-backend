@@ -32,5 +32,10 @@ services:
       interval: 1s
       timeout: 5s
       retries: 10
+    volumes:
+      - ./mysql:/docker-entrypoint-initdb.d
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/my.cnf:/etc/mysql/my.cnf
+      - ./mysql/logs:/logs
 networks:
   springapimysql-net:
