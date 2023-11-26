@@ -13,6 +13,9 @@ public class MessageModel {
     @Column(name = "message_id")
     private Long messageId;
 
+    @Column(name="timestamp")
+    private String timestamp;
+
     @Column(name = "message")
     private String message;
 
@@ -41,8 +44,16 @@ public class MessageModel {
         return message;
     }
 
+    public String getTimestamp() {
+        return timestamp;
+    }
+
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public UserModel getSender() {

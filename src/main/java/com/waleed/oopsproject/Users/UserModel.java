@@ -22,6 +22,12 @@ public class UserModel {
     @Column(name = "campus_id", unique = true)
     private String campusID;
 
+    @Column(name ="hostel")
+    private String hostel;
+
+    public String getHostel() {
+        return hostel;
+    }
 
     public void setEmail(String email) {
         this.email = email;
@@ -29,6 +35,10 @@ public class UserModel {
 
     public void setCampusID(String campusID) {
         this.campusID = campusID;
+    }
+
+    public void setHostel(String hostel) {
+        this.hostel = hostel;
     }
 
     public Long getUserId() {

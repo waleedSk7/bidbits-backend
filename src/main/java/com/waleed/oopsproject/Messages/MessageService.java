@@ -24,6 +24,8 @@ public class MessageService {
     public MessageModel addMessage(MessageModel messageModel, Long productId, Long userId) {
         messageModel.setProduct(productRepository.findById(productId).orElse(null));
         messageModel.setSender(userRepository.findById(userId).orElse(null));
+        // set timestamp in string format
+        messageModel.setTimestamp(java.time.LocalDateTime.now().toString());
         return messageRepository.save(messageModel);
     }
 

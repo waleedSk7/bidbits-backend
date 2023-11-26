@@ -61,7 +61,10 @@ public class ProductService {
 
     // Get all
     public Iterable<ProductModel> getAllProducts() {
-        return productRepository.findAll();
+        // Find the products that are not sold
+        List<ProductModel> products = productRepository.findAllBy();
+        products.removeIf(ProductModel::isSold);
+        return products;
     }
 
     // Get by category

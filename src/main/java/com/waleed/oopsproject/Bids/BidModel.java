@@ -24,6 +24,11 @@ public class BidModel {
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
     private ProductModel product;
 
+    @Column(name ="frozen")
+    private boolean frozen;
+
+
+
     public BidModel(UserModel userId, int bid, ProductModel product) {
         this.userId = userId;
         this.bid = bid;
@@ -33,7 +38,13 @@ public class BidModel {
     public BidModel() {
 
     }
+    public boolean isFrozen() {
+        return frozen;
+    }
 
+    public void setFrozen(boolean frozen) {
+        this.frozen = frozen;
+    }
     public Long getUserId() {
         return userId.getUserId();
     }

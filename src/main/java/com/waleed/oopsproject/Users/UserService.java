@@ -54,4 +54,18 @@ public class UserService {
         public UserModel getUserByCampusID(String  campusID) {
             return userRepository.findByCampusID(campusID);
         }
+
+    public UserModel setCampusId(Long userId, String campusId) {
+        UserModel userModel = userRepository.findById(userId).orElse(null);
+        assert userModel != null;
+        userModel.setCampusID(campusId);
+        return userRepository.save(userModel);
+    }
+
+    public UserModel setHostel(Long userId, String hostel) {
+        UserModel userModel = userRepository.findById(userId).orElse(null);
+        assert userModel != null;
+        userModel.setHostel(hostel);
+        return userRepository.save(userModel);
+    }
 }

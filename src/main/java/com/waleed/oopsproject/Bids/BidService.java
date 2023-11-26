@@ -58,4 +58,12 @@ public class BidService  {
         }
         return highestBid;
     }
+
+    public BidModel freezeBid(Long bidId, Long userId) {
+        BidModel bidModel = bidRepository.findById(bidId).orElse(null);
+        assert bidModel != null;
+        bidModel.setFrozen(true);
+        bidRepository.save(bidModel);
+        return bidModel;
+    }
 }

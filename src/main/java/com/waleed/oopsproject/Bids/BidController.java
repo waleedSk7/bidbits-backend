@@ -30,6 +30,11 @@ public class BidController {
     public int getHighestBid(@PathVariable Long productId) {
         return bidService.getHighestBid(productId);
     }
+
+    @PostMapping(path = "/freezeBid")
+    public BidModel freezeBid(@RequestParam Long bidId, @RequestParam Long userId) {
+        return bidService.freezeBid(bidId, userId);
+    }
     // Update
     // Delete
     // Get all

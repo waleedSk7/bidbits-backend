@@ -31,8 +31,19 @@ public class ProductModel {
     @Column(name="starting_bid")
     private int startingBid;
 
+    @Column(name="sold", columnDefinition = "boolean default false")
+    private boolean sold;
+
     public void setStartingBid(int startingBid) {
         this.startingBid = startingBid;
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 
     public int getStartingBid() {
