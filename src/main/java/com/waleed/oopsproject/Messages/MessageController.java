@@ -41,7 +41,7 @@ public class MessageController {
 
     // Get Messages for highest bid
     @GetMapping(path = "/highestBid")
-    public Iterable<MessageModel> getMessagesByHighestBid(@RequestParam Long productId) {
+    public Object getMessagesByHighestBid(@RequestParam Long productId) {
         return messageService.getMessagesFromHighestBidder(productId);
     }
 

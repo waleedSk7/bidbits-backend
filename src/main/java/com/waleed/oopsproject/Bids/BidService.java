@@ -7,6 +7,7 @@ import com.waleed.oopsproject.Users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,7 +64,23 @@ public class BidService  {
         BidModel bidModel = bidRepository.findById(bidId).orElse(null);
         assert bidModel != null;
         bidModel.setFrozen(true);
+        ProductModel productModel = bidModel.getProduct();
+        assert productModel != null;
+        productModel.setSold(true);
+        productRepository.save(productModel);
         bidRepository.save(bidModel);
         return bidModel;
+    }
+
+    // Get all the products a user has bid on.
+    public Iterable<ProductModel> getProductsByUserId(Long userId) {
+        UserModel userModel = userRepository.findById(userId).orElse(null);
+        assert userModel != null;
+        Iterable<BidModel> bids = bidRepository.findAllByUserId(userModel);
+        HashSet<ProductModel> products = new HashSet<>();
+        for (BidModel bid : bids) {
+            products.add(bid.getProduct());
+        }
+        return products;
     }
 }

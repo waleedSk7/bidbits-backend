@@ -9,7 +9,7 @@ import com.waleed.oopsproject.Users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 
 @Service
 public class MessageService {
@@ -62,10 +62,17 @@ public class MessageService {
         return messages;
     }
 
-    public Iterable<MessageModel> getMessagesFromHighestBidder(Long productId) {
+    // This method is used to get messages for the highest bidder
+    // It creates a empty list of messages
+    // It gets all the bids for the product
+    // It gets the highest bid
+    // It gets the user for the highest bid
+    // It gets all the messages for the product and the user
+    // It returns the messages
+    public Object getMessagesFromHighestBidder(Long productId) {
         ProductModel productModel = productRepository.findById(productId).orElse(null);
         assert productModel != null;
-        List<MessageModel> messages = new java.util.ArrayList<>();
+        HashSet<MessageModel> messages = new HashSet<>();
         List<BidModel> bids = bidRepository.findAllByProduct(productModel);
         int highestBid = 0;
         for (BidModel bid : bids) {
@@ -77,10 +84,14 @@ public class MessageService {
             if (bid.getBid() == highestBid) {
                 messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndSender(productModel, bid.getUser()));
                 messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndReceiver(productModel, bid.getUser()));
-                return messages;
+                Map<String, Object> response = new HashMap<>();
+                response.put("messages", messages);
+                response.put("highestBid", highestBid);
+                return response;
             }
         }
-        return messages;
+        return null;
+
     }
 
     // Get Messages for bidder view
@@ -91,7 +102,7 @@ public class MessageService {
         UserModel receiver = userRepository.findById(productModel.getUser().getUserId()).orElse(null);
         assert sender != null;
         assert receiver != null;
-        List<MessageModel> messages = new java.util.ArrayList<>();
+        HashSet<MessageModel> messages = new HashSet<>();
         messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndSender(productModel, sender));
         messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndReceiver(productModel, sender));
         return messages;

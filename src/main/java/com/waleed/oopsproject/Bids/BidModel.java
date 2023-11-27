@@ -13,7 +13,7 @@ public class BidModel {
     @Column(name = "bid_id")
     private Long bidId;
 
-    @ManyToOne(targetEntity = UserModel.class, cascade = CascadeType.ALL)
+    @ManyToOne(targetEntity = UserModel.class)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserModel userId;
 
@@ -37,6 +37,10 @@ public class BidModel {
 
     public BidModel() {
 
+    }
+
+    public Long getBidId() {
+        return bidId;
     }
     public boolean isFrozen() {
         return frozen;

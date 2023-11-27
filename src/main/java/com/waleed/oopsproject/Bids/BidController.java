@@ -1,5 +1,6 @@
 package com.waleed.oopsproject.Bids;
 
+import com.waleed.oopsproject.Products.ProductModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,6 +35,11 @@ public class BidController {
     @PostMapping(path = "/freezeBid")
     public BidModel freezeBid(@RequestParam Long bidId, @RequestParam Long userId) {
         return bidService.freezeBid(bidId, userId);
+    }
+
+    @GetMapping(path = "/products/{userId}")
+    public Iterable<ProductModel> getBiddedProducts(@PathVariable Long userId) {
+        return bidService.getProductsByUserId(userId);
     }
     // Update
     // Delete
