@@ -1,5 +1,7 @@
 package com.waleed.oopsproject.Messages;
 
+import com.waleed.oopsproject.Bids.BidModel;
+import com.waleed.oopsproject.Bids.BidRepository;
 import com.waleed.oopsproject.Products.ProductModel;
 import com.waleed.oopsproject.Products.ProductRepository;
 import com.waleed.oopsproject.Users.UserModel;
@@ -20,10 +22,14 @@ public class MessageService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private BidRepository bidRepository;
+
     // Create
-    public MessageModel addMessage(MessageModel messageModel, Long productId, Long userId) {
+    public MessageModel addMessage(MessageModel messageModel, Long productId, Long userId, Long receiverId) {
         messageModel.setProduct(productRepository.findById(productId).orElse(null));
         messageModel.setSender(userRepository.findById(userId).orElse(null));
+        messageModel.setReceiver(userRepository.findById(receiverId).orElse(null));
         // set timestamp in string format
         messageModel.setTimestamp(java.time.LocalDateTime.now().toString());
         return messageRepository.save(messageModel);
@@ -53,6 +59,41 @@ public class MessageService {
         for (ProductModel product : products) {
             messages.addAll((List<MessageModel>) messageRepository.findAllByProduct(product));
         }
+        return messages;
+    }
+
+    public Iterable<MessageModel> getMessagesFromHighestBidder(Long productId) {
+        ProductModel productModel = productRepository.findById(productId).orElse(null);
+        assert productModel != null;
+        List<MessageModel> messages = new java.util.ArrayList<>();
+        List<BidModel> bids = bidRepository.findAllByProduct(productModel);
+        int highestBid = 0;
+        for (BidModel bid : bids) {
+            if (bid.getBid() > highestBid) {
+                highestBid = bid.getBid();
+            }
+        }
+        for (BidModel bid : bids) {
+            if (bid.getBid() == highestBid) {
+                messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndSender(productModel, bid.getUser()));
+                messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndReceiver(productModel, bid.getUser()));
+                return messages;
+            }
+        }
+        return messages;
+    }
+
+    // Get Messages for bidder view
+    public Iterable<MessageModel> getMessagesByProductAndSender(Long productId, Long senderId) {
+        ProductModel productModel = productRepository.findById(productId).orElse(null);
+        assert productModel != null;
+        UserModel sender = userRepository.findById(senderId).orElse(null);
+        UserModel receiver = userRepository.findById(productModel.getUser().getUserId()).orElse(null);
+        assert sender != null;
+        assert receiver != null;
+        List<MessageModel> messages = new java.util.ArrayList<>();
+        messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndSender(productModel, sender));
+        messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndReceiver(productModel, sender));
         return messages;
     }
 }

@@ -20,8 +20,12 @@ public class MessageModel {
     private String message;
 
     @ManyToOne(targetEntity = UserModel.class)
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "sender_id", referencedColumnName = "user_id")
     private UserModel sender;
+
+    @ManyToOne(targetEntity = UserModel.class)
+    @JoinColumn(name = "receiver_id", referencedColumnName = "user_id")
+    private UserModel receiver;
 
     @ManyToOne(targetEntity = ProductModel.class)
     @JoinColumn(name = "product_id", referencedColumnName = "product_id")
@@ -52,8 +56,16 @@ public class MessageModel {
         this.message = message;
     }
 
+
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+    public void setReceiver(UserModel receiver) {
+        this.receiver = receiver;
+    }
+
+    public UserModel getReceiver() {
+        return receiver;
     }
 
     public UserModel getSender() {

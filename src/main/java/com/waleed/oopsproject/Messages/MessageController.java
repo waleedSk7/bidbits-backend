@@ -23,8 +23,8 @@ public class MessageController {
 
     // Send Message
     @PostMapping(path = "/")
-    public MessageModel addMessage(@RequestBody MessageModel messageModel, @RequestParam Long productId, @RequestParam Long userId) {
-        return messageService.addMessage(messageModel, productId, userId);
+    public MessageModel addMessage(@RequestBody MessageModel messageModel, @RequestParam Long productId, @RequestParam Long userId, @RequestParam Long receiverId) {
+        return messageService.addMessage(messageModel, productId, userId, receiverId);
     }
 
     // Get messages by sender id
@@ -37,5 +37,17 @@ public class MessageController {
     @GetMapping(path = "/receiver")
     public Iterable<MessageModel> getMessagesByReceiverId(@RequestParam Long receiverId) {
         return messageService.getMessagesByReceiverId(receiverId);
+    }
+
+    // Get Messages for highest bid
+    @GetMapping(path = "/highestBid")
+    public Iterable<MessageModel> getMessagesByHighestBid(@RequestParam Long productId) {
+        return messageService.getMessagesFromHighestBidder(productId);
+    }
+
+    // Get Messages for sender and product
+    @GetMapping(path = "/senderAndProduct")
+    public Iterable<MessageModel> getMessagesBySenderAndProduct(@RequestParam Long productId, @RequestParam Long senderId) {
+        return messageService.getMessagesByProductAndSender(productId, senderId);
     }
 }

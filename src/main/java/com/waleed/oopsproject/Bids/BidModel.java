@@ -49,6 +49,10 @@ public class BidModel {
         return userId.getUserId();
     }
 
+    public UserModel getUser() {
+        return userId;
+    }
+
     public int getBid() {
         return bid;
     }
