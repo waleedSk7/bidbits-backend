@@ -18,4 +18,6 @@ public interface MessageRepository extends JpaRepository<MessageModel, Long> {
     Iterable<MessageModel> findAllByProductAndSender(ProductModel product, UserModel sender);
 
     Iterable<MessageModel> findAllByProductAndReceiver(ProductModel product, UserModel receiver);
+
+    Iterable<MessageModel> findAllByReceiver(UserModel user);
 }

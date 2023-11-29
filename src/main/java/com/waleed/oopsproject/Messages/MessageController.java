@@ -15,6 +15,12 @@ public class MessageController {
         return messageService.getAllMessages();
     }
 
+    // Get all messages for user
+    @GetMapping(path = "/user")
+    public Iterable<MessageModel> getAllMessagesForUser(@RequestParam Long userId) {
+        return messageService.getMessagesForUser(userId);
+    }
+
     // Get messages by product id
     @GetMapping(path = "/product")
     public Iterable<MessageModel> getMessagesByProductId(@RequestParam Long productId) {

@@ -62,6 +62,15 @@ public class MessageService {
         return messages;
     }
 
+    public Iterable<MessageModel> getMessagesForUser(Long userId) {
+        HashSet<MessageModel> messages = new HashSet<>();
+        UserModel user = userRepository.findById(userId).orElse(null);
+        assert user != null;
+        messages.addAll((List<MessageModel>) messageRepository.findAllBySender(user));
+        messages.addAll((List<MessageModel>) messageRepository.findAllByReceiver(user));
+        return messages;
+    }
+
     // This method is used to get messages for the highest bidder
     // It creates a empty list of messages
     // It gets all the bids for the product
