@@ -82,11 +82,14 @@ public class MessageService {
         }
         for (BidModel bid : bids) {
             if (bid.getBid() == highestBid) {
-                messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndSender(productModel, bid.getUser()));
-                messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndReceiver(productModel, bid.getUser()));
+                messages.addAll(
+                        (List<MessageModel>) messageRepository.findAllByProductAndSender(productModel, bid.getUser()));
+                messages.addAll((List<MessageModel>) messageRepository.findAllByProductAndReceiver(productModel,
+                        bid.getUser()));
                 Map<String, Object> response = new HashMap<>();
                 response.put("messages", messages);
                 response.put("highestBid", highestBid);
+                response.put("bidder", bid.getUser());
                 return response;
             }
         }
