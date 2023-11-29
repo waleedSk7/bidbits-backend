@@ -1,7 +1,5 @@
 package com.waleed.oopsproject.Products;
 
-import com.waleed.oopsproject.Bids.BidModel;
-
 import com.waleed.oopsproject.Users.UserModel;
 import jakarta.persistence.*;
 
@@ -15,27 +13,27 @@ public class ProductModel {
     @Column(name = "product_name")
     private String productName;
 
-    @Column(name= "image")
+    @Column(name = "image")
     private String image;
 
-    @Column(name= "details")
+    @Column(name = "details")
     private String details;
 
-    @Column(name= "category")
+    @Column(name = "category")
     private String category;
 
     @ManyToOne(targetEntity = UserModel.class)
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private UserModel user;
 
-    @Column(name="starting_bid")
+    @Column(name = "starting_bid")
     private int startingBid;
 
-    @Column(name="sold", columnDefinition = "boolean default false")
+    @Column(name = "sold", columnDefinition = "boolean default false")
     private boolean sold;
 
-    public boolean getSold(boolean sold) {
-        return sold;
+    public boolean getSold() {
+        return this.sold;
     }
 
     public void setStartingBid(int startingBid) {
@@ -101,6 +99,5 @@ public class ProductModel {
     public Long getProductId() {
         return id;
     }
-
 
 }

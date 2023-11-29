@@ -85,7 +85,7 @@ public class ProductService {
                 productBids.put(productId, 1);
             }
         }
-        List<ProductModel> products = productRepository.findAllBy();
+        List<ProductModel> products = productRepository.findAllBySold(false);
         products.sort((o1, o2) -> {
             Integer o1Bids = productBids.get(o1.getProductId());
             Integer o2Bids = productBids.get(o2.getProductId());

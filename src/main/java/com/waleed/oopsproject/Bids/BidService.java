@@ -30,6 +30,9 @@ public class BidService  {
     public BidModel addBid(BidModel bidModel, Long productId, Long userId) {
         ProductModel productModel = productRepository.findById(productId).orElse(null);
         assert productModel != null;
+        if (productModel.isSold()) {
+            return null;
+        }
         bidModel.setProduct(productModel);
         UserModel userModel = userRepository.findById(userId).orElse(null);
         assert userModel != null;

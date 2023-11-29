@@ -17,5 +17,7 @@ public interface ProductRepository extends JpaRepository<ProductModel, Long> {
 
     List<ProductModel> findAllBy();
 
+    List<ProductModel> findAllBySold(boolean sold);
+
     Iterable<ProductModel> findAllByUser(UserModel userModel);
 }
