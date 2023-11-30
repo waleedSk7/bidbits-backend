@@ -40,4 +40,9 @@ public class UserController {
     public UserModel setCampusId(@RequestParam Long userId, @RequestParam String campusId) {
         return userService.setCampusId(userId, campusId);
     }
+
+    @PostMapping(path = "/setPhone")
+    public UserModel setPhone(@RequestParam Long userId, @RequestParam String phone) {
+        return userService.setPhone(userId, phone);
+    }
 }

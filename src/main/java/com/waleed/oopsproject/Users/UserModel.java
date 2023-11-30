@@ -25,6 +25,17 @@ public class UserModel {
     @Column(name ="hostel")
     private String hostel;
 
+    @Column(name ="phone")
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public String getHostel() {
         return hostel;
     }

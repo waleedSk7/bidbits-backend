@@ -68,4 +68,11 @@ public class UserService {
         userModel.setHostel(hostel);
         return userRepository.save(userModel);
     }
+
+    public UserModel setPhone(Long userId, String phone) {
+        UserModel userModel = userRepository.findById(userId).orElse(null);
+        assert userModel != null;
+        userModel.setPhone(phone);
+        return userRepository.save(userModel);
+    }
 }
